@@ -68,8 +68,18 @@ designFiles.forEach(file => {
     
     console.log(`  ✓ Generated and copied to web/public/models/\n`);
   } catch (error) {
-    console.error(`  ✗ Error generating ${outputName}:`, error.message);
-    console.error('');
+    console.error(`  ✗ Error generating ${outputName}:`);
+    
+    // Provide helpful error messages
+    if (error.message.includes('module.exports')) {
+      console.error('    Make sure your file exports { main, getParameterDefinitions }');
+    } else if (error.message.includes('require')) {
+      console.error('    Check that @jscad/modeling is properly required');
+    } else {
+      console.error(`    ${error.message}`);
+    }
+    
+    console.error('    Fix the errors in your JSCAD file and try again.\n');
   }
 });
 

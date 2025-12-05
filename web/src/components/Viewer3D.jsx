@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-import { OrbitControls, Stage, Environment } from '@react-three/drei';
+import { OrbitControls, Stage } from '@react-three/drei';
 
 function Model({ url }) {
   // Load the STL file asynchronously
@@ -35,7 +35,6 @@ export default function Viewer3D({ modelUrl }) {
           enableDamping
           dampingFactor={0.05}
         />
-        <Environment preset="city" />
       </Canvas>
     </div>
   );
