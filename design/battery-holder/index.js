@@ -57,6 +57,9 @@ const main = (params) => {
   const batteryDiameter = 18;
   const batteryLength = 65;
   
+  // Battery insertion depth ratio (how deep batteries sit in the holder)
+  const BATTERY_INSERTION_DEPTH_RATIO = 0.7; // 70% of battery length is inserted
+  
   // Apply tolerance to create the hole size
   const holeDiameter = batteryDiameter + tolerance;
   const holeDepth = batteryLength + 1; // Extra 1mm for length variation
@@ -65,7 +68,7 @@ const main = (params) => {
   const spacing = holeDiameter + wallThickness; // Space between cell centers
   const totalWidth = (numCells * spacing) + wallThickness;
   const holderDepth = holeDiameter + wallThickness * 2;
-  const holderHeight = baseThickness + holeDepth * 0.7; // Batteries sit 70% deep
+  const holderHeight = baseThickness + holeDepth * BATTERY_INSERTION_DEPTH_RATIO;
   
   // Create the base block
   const base = cuboid({ 
@@ -74,19 +77,22 @@ const main = (params) => {
   });
   
   // Create battery holes (cylinders to subtract)
+  // Holes are vertical cylinders positioned from the base up
   const holes = [];
   const startX = -(numCells - 1) * spacing / 2;
+  
+  // Center position for cylinder: base + half of insertion depth
+  const holeCenterZ = baseThickness + (holeDepth * BATTERY_INSERTION_DEPTH_RATIO) / 2;
   
   for (let i = 0; i < numCells; i++) {
     const xPos = startX + (i * spacing);
     
-    // Main battery hole - oriented horizontally (along X axis)
-    // We rotate by placing it along Z, then will need to account for this
+    // Create vertical cylinder hole for battery
     const hole = translate(
-      [xPos, 0, baseThickness + holeDepth * 0.35],
+      [xPos, 0, holeCenterZ],
       cylinder({ 
         radius: holeDiameter / 2, 
-        height: holeDepth,
+        height: holeDepth * BATTERY_INSERTION_DEPTH_RATIO,
         segments: 32
       })
     );
