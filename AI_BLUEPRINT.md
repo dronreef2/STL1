@@ -30,3 +30,46 @@ O agente deve manter rigorosamente esta estrutura:
 │   └── src/components/  # Viewer3D.jsx, ParameterInputs.jsx
 ├── dist/                # SAÍDA: STLs e GCodes (gerados via CI ou local)
 └── package.json         # Scripts de orquestração
+```
+
+## 4. Regras de Desenvolvimento (Code Standards)
+
+### A. Regras para JSCAD (Code-CAD)
+1.  **Parametrização Obrigatória:** Todo modelo deve exportar `getParameterDefinitions` para permitir ajustes de UI.
+2.  **Modularidade:** Peças complexas devem ser compostas de funções menores importadas de `/design/utils`.
+3.  **Tolerâncias:** Ao usar o **Agentic Search** para buscar specs (ex: "tamanho parafuso M3"), adicione sempre uma margem de tolerância (ex: +0.2mm para furos impressos em FDM).
+
+### B. Regras para Web (React/Three)
+1.  **Carregamento Assíncrono:** Use `React.Suspense` e `useLoader` para carregar STLs.
+2.  **Performance:** Configure o `<Canvas>` com sombras leves e `pixelRatio` adaptativo.
+3.  **Isolamento:** O Viewer deve ser um componente genérico que aceita uma URL de STL como prop.
+
+### C. Regras de Automação (CI/CD)
+1.  **Segurança:** Use a integração do App "Access Tokens" para pushes no repo.
+2.  **Idempotência:** Scripts de build só devem rodar se houver mudanças na pasta `/design`.
+
+## 5. Roadmap de Implementação (Fases)
+
+### Fase 1: Setup do Ambiente (Scaffolding)
+*   [ ] Inicializar `package.json` na raiz com workspaces (root e web).
+*   [ ] Instalar dependências JSCAD CLI e libs de modelagem.
+*   [ ] Configurar Vite + React na pasta `/web`.
+*   [ ] Criar script `npm run gen` que varre `/design`, compila os JS e cospe STLs em `/web/public/models`.
+
+### Fase 2: O Primeiro Modelo (Proof of Concept)
+*   [ ] Criar `/design/demo-box/index.js` (Caixa paramétrica com tampa).
+*   [ ] Testar geração de STL via CLI.
+
+### Fase 3: O Visualizador Web
+*   [ ] Criar componente `STLViewer.jsx` usando `@react-three/drei/Stage`.
+*   [ ] Criar interface lateral para listar arquivos na pasta `/models`.
+
+### Fase 4: Integração de IA e CI
+*   [ ] Configurar GitHub Action para rodar o build no Push.
+*   [ ] Usar Gemini para validar lógica do JSCAD antes do build.
+
+---
+
+## 6. Instruções para Agentic Search & Models
+*   **Ao pesquisar peças de hardware:** Busque sempre por "datasheet" ou "technical drawing" oficial (ex: DIN standard for screws).
+*   **Ao encontrar erros:** Se o JSCAD falhar, pesquise a documentação da V2 especificamente, pois a API mudou muito recentemente.
