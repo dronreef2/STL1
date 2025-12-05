@@ -1,0 +1,76 @@
+name: MakerOS Manufacturing Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # Job 1: Quality Check and Build Models
+  build-models:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Generate STL Models
+        run: npm run gen
+
+      - name: Upload STL Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: stl-models
+          path: dist/*.stl
+          retention-days: 30
+
+  # Job 2: Build and Deploy Web Viewer
+  build-web:
+    runs-on: ubuntu-latest
+    needs: build-models
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Root Dependencies
+        run: npm install
+
+      - name: Generate STL Models
+        run: npm run gen
+
+      - name: Install Web Dependencies
+        run: npm install --workspace=web
+
+      - name: Build Web Application
+        run: npm run web:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: success()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./web/dist
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

@@ -1,0 +1,30 @@
+{
+  "name": "makeros",
+  "version": "1.0.0",
+  "description": "MakerOS - Manufacturing as Code with GitOps",
+  "private": true,
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "build:example": "jscad design/examples/index.js -o dist/examples.stl",
+    "gen": "node scripts/generate-all-models.js",
+    "web:dev": "npm run dev --workspace=web",
+    "web:build": "npm run build --workspace=web",
+    "install:all": "npm install && npm install --workspace=web"
+  },
+  "devDependencies": {
+    "@jscad/cli": "^2.3.6",
+    "@jscad/modeling": "^2.12.6",
+    "@jscad/io": "^2.4.12"
+  },
+  "keywords": [
+    "jscad",
+    "3d-printing",
+    "cad",
+    "manufacturing",
+    "gitops"
+  ],
+  "author": "",
+  "license": "MIT"
+}
