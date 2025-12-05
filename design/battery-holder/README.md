@@ -1,18 +1,11 @@
-# 18650 Battery Holder
+# Battery Holder
 
-## Description
-Parametric battery holder for 18650 lithium-ion cells.
+## Parâmetros Configuráveis
+| Parâmetro | Tipo | Padrão | Descrição |
+|-----------|------|--------|-----------|
+| numCells | number | 2 | Number of Battery Cells |
+| tolerance | number | 0.4 | Tolerance (mm) - Clearance for easy fit |
+| baseThickness | number | 3 | Base Thickness (mm) |
+| wallThickness | number | 2.5 | Wall Thickness (mm) |
 
-## Parameters
-- **numCells**: Number of battery cells (1-6)
-- **tolerance**: Clearance for easy fit (0.2-1.0mm, default 0.4mm)
-- **baseThickness**: Base thickness (2-10mm, default 3mm)  
-- **wallThickness**: Wall thickness (1.5-5mm, default 2.5mm)
-
-## Specifications
-Based on standard 18650 battery dimensions:
-- Diameter: 18mm
-- Length: 65mm (can vary 65-70mm with protection circuits)
-
-## Generation
-Run `npm run gen` to generate the STL file.
+[Download STL](../../dist/battery-holder.stl)

@@ -9,6 +9,7 @@
   "scripts": {
     "build:example": "jscad design/examples/index.js -o dist/examples.stl",
     "gen": "node scripts/generate-all-models.js",
+    "docs": "node scripts/generate-docs.js",
     "web:dev": "npm run dev --workspace=web",
     "web:build": "npm run build --workspace=web",
     "install:all": "npm install && npm install --workspace=web"

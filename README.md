@@ -112,7 +112,17 @@ module.exports = { main, getParameterDefinitions };
 npm run gen
 ```
 
-4. View in the browser at `http://localhost:3000`
+4. Generate documentation:
+
+```bash
+npm run docs
+```
+
+This will create a `README.md` in your design folder with:
+- A formatted table of all parameters
+- Links to the generated STL file
+
+5. View in the browser at `http://localhost:3000`
 
 ## 🔧 Available Scripts
 
@@ -120,6 +130,7 @@ npm run gen
 |--------|-------------|
 | `npm install` | Install root dependencies |
 | `npm run gen` | Generate all STL models from design/ |
+| `npm run docs` | Generate README documentation for all design projects |
 | `npm run build:models` | Build a specific model (examples) |
 | `npm run web:dev` | Start the web development server |
 | `npm run web:build` | Build the web app for production |
