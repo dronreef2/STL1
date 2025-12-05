@@ -11,6 +11,9 @@ const path = require('path');
 const DESIGN_DIR = path.join(__dirname, '../design');
 const DIST_DIR = path.join(__dirname, '../dist');
 
+// Directories to exclude from documentation generation
+const EXCLUDED_DIRS = ['node_modules', 'utils', 'examples'];
+
 // Function to find all index.js files in design/
 function findDesignFiles(dir) {
   const files = [];
@@ -21,7 +24,7 @@ function findDesignFiles(dir) {
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
       
-      if (entry.isDirectory() && entry.name !== 'node_modules' && entry.name !== 'utils') {
+      if (entry.isDirectory() && !EXCLUDED_DIRS.includes(entry.name)) {
         scan(fullPath);
       } else if (entry.name === 'index.js') {
         files.push(fullPath);
@@ -46,11 +49,6 @@ function generateReadme(designFile) {
   const projectDir = path.dirname(designFile);
   const projectName = path.basename(projectDir);
   const relativePath = path.relative(DESIGN_DIR, designFile);
-  
-  // Skip examples and utils folders
-  if (projectName === 'examples' || projectName === 'utils') {
-    return null;
-  }
   
   console.log(`Generating documentation for: ${projectName}`);
   
@@ -92,9 +90,15 @@ function generateReadme(designFile) {
     
     content += '\n';
     
-    // Add STL download link
+    // Add STL download link with existence check
     const stlPath = `../../dist/${projectName}.stl`;
-    content += `[Download STL](${stlPath})\n`;
+    const stlFullPath = path.join(DIST_DIR, `${projectName}.stl`);
+    
+    if (fs.existsSync(stlFullPath)) {
+      content += `[Download STL](${stlPath})\n`;
+    } else {
+      content += `_STL file not yet generated. Run \`npm run gen\` to create it._\n`;
+    }
     
     return {
       projectDir,
