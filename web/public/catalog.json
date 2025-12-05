@@ -1,0 +1,93 @@
+[
+  {
+    "id": "battery-holder",
+    "title": "Battery Holder",
+    "description": "Parametric 18650 Battery Holder",
+    "stlUrl": "/models/battery-holder.stl",
+    "parameters": [
+      {
+        "name": "numCells",
+        "type": "number",
+        "initial": 2,
+        "caption": "Number of Battery Cells",
+        "min": 1,
+        "max": 6
+      },
+      {
+        "name": "tolerance",
+        "type": "number",
+        "initial": 0.4,
+        "caption": "Tolerance (mm) - Clearance for easy fit",
+        "min": 0.2,
+        "max": 1,
+        "step": 0.1
+      },
+      {
+        "name": "baseThickness",
+        "type": "number",
+        "initial": 3,
+        "caption": "Base Thickness (mm)",
+        "min": 2,
+        "max": 10
+      },
+      {
+        "name": "wallThickness",
+        "type": "number",
+        "initial": 2.5,
+        "caption": "Wall Thickness (mm)",
+        "min": 1.5,
+        "max": 5
+      }
+    ],
+    "lastUpdate": "2025-12-05T21:09:20.262Z"
+  },
+  {
+    "id": "demo-box",
+    "title": "Demo Box",
+    "description": "Demo Box - Parametric Container with Lid",
+    "stlUrl": "/models/demo-box.stl",
+    "parameters": [
+      {
+        "name": "width",
+        "type": "number",
+        "initial": 50,
+        "caption": "Box Width (mm)",
+        "min": 20,
+        "max": 100
+      },
+      {
+        "name": "depth",
+        "type": "number",
+        "initial": 50,
+        "caption": "Box Depth (mm)",
+        "min": 20,
+        "max": 100
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "initial": 30,
+        "caption": "Box Height (mm)",
+        "min": 10,
+        "max": 80
+      },
+      {
+        "name": "wallThickness",
+        "type": "number",
+        "initial": 2,
+        "caption": "Wall Thickness (mm)",
+        "min": 1,
+        "max": 5
+      },
+      {
+        "name": "cornerRadius",
+        "type": "number",
+        "initial": 3,
+        "caption": "Corner Radius (mm)",
+        "min": 0,
+        "max": 10
+      }
+    ],
+    "lastUpdate": "2025-12-05T21:09:20.262Z"
+  }
+]

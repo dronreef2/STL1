@@ -60,6 +60,9 @@ jobs:
       - name: Generate STL Models
         run: npm run gen
 
+      - name: Generate Documentation and Catalog
+        run: npm run docs
+
       - name: Install Web Dependencies
         run: npm install --workspace=web
 
