@@ -72,10 +72,10 @@ function generateReadme(designFile) {
     // Add Parameters table
     content += `## Parâmetros Configuráveis\n`;
     content += `| Parâmetro | Tipo | Padrão | Descrição |\n`;
-    content += `|-----------|------|--------|-----------|`;
+    content += `|-----------|------|--------|-----------|\n`;
     
     if (paramDefs.length === 0) {
-      content += `\n| - | - | - | Nenhum parâmetro configurável |\n`;
+      content += `| - | - | - | Nenhum parâmetro configurável |\n`;
     } else {
       paramDefs.forEach(param => {
         const name = param.name || '-';
@@ -83,9 +83,8 @@ function generateReadme(designFile) {
         const initial = param.initial !== undefined ? param.initial : '-';
         const description = param.caption || '-';
         
-        content += `\n| ${name} | ${type} | ${initial} | ${description} |`;
+        content += `| ${name} | ${type} | ${initial} | ${description} |\n`;
       });
-      content += '\n';
     }
     
     content += '\n';
