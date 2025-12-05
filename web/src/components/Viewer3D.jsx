@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-import { OrbitControls, Stage } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 
 function Model({ url }) {
   // Load the STL file asynchronously
@@ -17,7 +17,7 @@ function Model({ url }) {
 
 export default function Viewer3D({ modelUrl }) {
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <Canvas 
         shadows 
         camera={{ position: [30, 30, 30], fov: 50 }}
@@ -25,9 +25,12 @@ export default function Viewer3D({ modelUrl }) {
         dpr={[1, 2]}
       >
         <Suspense fallback={null}>
-          <Stage environment="city" intensity={0.6} shadows="contact">
-            <Model url={modelUrl} />
-          </Stage>
+          {/* Lighting setup */}
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+          <directionalLight position={[-10, -10, -5]} intensity={0.3} />
+          
+          <Model url={modelUrl} />
         </Suspense>
         <OrbitControls 
           autoRotate 
