@@ -142,7 +142,8 @@ function generateReadme(designFile) {
         max: param.max,
         step: param.step
       })),
-      lastUpdate: stats.mtime.toISOString()
+      lastUpdate: stats.mtime.toISOString(),
+      readmeContent: content
     };
     
     return {
