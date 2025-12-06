@@ -4,6 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Download, Github, Search, X, FileText, Settings } from 'lucide-react';
 
+// Repository configuration
+const REPO_URL = 'https://github.com/dronreef2/STL1';
+
 function App() {
   const [catalog, setCatalog] = useState([]);
   const [selectedModelIndex, setSelectedModelIndex] = useState(0);
@@ -112,8 +115,7 @@ function App() {
   };
 
   const handleViewSource = () => {
-    const repoUrl = 'https://github.com/dronreef2/STL1';
-    window.open(`${repoUrl}/tree/main/design/${selectedModel.id}`, '_blank');
+    window.open(`${REPO_URL}/tree/main/design/${selectedModel.id}`, '_blank');
   };
 
   return (
@@ -358,7 +360,7 @@ function App() {
                     li: ({node, ...props}) => <li className="text-slate-300" {...props} />,
                   }}
                 >
-                  {selectedModel.readmeContent || 'No instructions available.'}
+                  {selectedModel?.readmeContent || 'No instructions available.'}
                 </ReactMarkdown>
               </div>
             )}
