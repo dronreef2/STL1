@@ -39,7 +39,7 @@
         "max": 5
       }
     ],
-    "lastUpdate": "2025-12-06T02:37:29.372Z",
+    "lastUpdate": "2025-12-06T02:50:28.156Z",
     "readmeContent": "# Battery Holder\n\n## Parâmetros Configuráveis\n| Parâmetro | Tipo | Padrão | Descrição |\n|-----------|------|--------|-----------|\n| numCells | number | 2 | Number of Battery Cells |\n| tolerance | number | 0.4 | Tolerance (mm) - Clearance for easy fit |\n| baseThickness | number | 3 | Base Thickness (mm) |\n| wallThickness | number | 2.5 | Wall Thickness (mm) |\n\n[Download STL](../../dist/battery-holder.stl)\n"
   },
   {
@@ -89,7 +89,7 @@
         "max": 10
       }
     ],
-    "lastUpdate": "2025-12-06T02:37:29.372Z",
+    "lastUpdate": "2025-12-06T02:50:28.156Z",
     "readmeContent": "# Demo Box\n\n## Parâmetros Configuráveis\n| Parâmetro | Tipo | Padrão | Descrição |\n|-----------|------|--------|-----------|\n| width | number | 50 | Box Width (mm) |\n| depth | number | 50 | Box Depth (mm) |\n| height | number | 30 | Box Height (mm) |\n| wallThickness | number | 2 | Wall Thickness (mm) |\n| cornerRadius | number | 3 | Corner Radius (mm) |\n\n[Download STL](../../dist/demo-box.stl)\n"
   }
 ]
