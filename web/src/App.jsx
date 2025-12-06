@@ -120,15 +120,15 @@ function App() {
     <div className="App h-screen flex flex-col bg-slate-900">
       {/* Header */}
       <header className="bg-slate-950 text-white p-4 shadow-lg z-20 border-b border-slate-800">
-        <h1 className="text-2xl font-bold text-slate-100">MakerOS - 3D Model Viewer</h1>
-        <p className="text-sm text-slate-400 mt-1">
+        <h1 className="text-xl md:text-2xl font-bold text-slate-100">MakerOS - 3D Model Viewer</h1>
+        <p className="text-xs md:text-sm text-slate-400 mt-1">
           Code-CAD with JSCAD • React Three Fiber • GitOps
         </p>
       </header>
       
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-80 bg-slate-800 border-r border-slate-700 overflow-y-auto shadow-lg">
+        <aside className="hidden md:block w-80 bg-slate-800 border-r border-slate-700 overflow-y-auto shadow-lg">
           <div className="p-4">
             <h3 className="font-bold text-lg mb-4 text-slate-100">Model Library</h3>
             
@@ -190,32 +190,40 @@ function App() {
 
         {/* Main content area */}
         <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Mobile Model Title - Only visible when sidebars are hidden */}
+          <div className="md:hidden bg-slate-900 px-4 py-3 border-b border-slate-700">
+            <h2 className="font-bold text-lg text-slate-100">{selectedModel.title}</h2>
+            <p className="text-xs text-slate-400">{selectedModel.description}</p>
+          </div>
+
           {/* 3D Viewer */}
           <div className="flex-1 relative bg-slate-950">
             <Viewer3D key={selectedModel.id} modelUrl={selectedModel.stlUrl} />
           </div>
 
           {/* Action Buttons - Above the panel */}
-          <div className="bg-slate-900 px-6 py-3 border-t border-slate-700 flex gap-3">
+          <div className="bg-slate-900 px-4 md:px-6 py-3 border-t border-slate-700 flex flex-wrap gap-2 md:gap-3">
             <button
               onClick={handleDownload}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors shadow-md"
+              className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors shadow-md"
             >
               <Download className="w-4 h-4" />
-              Download STL
+              <span className="hidden sm:inline">Download STL</span>
+              <span className="sm:hidden">Download</span>
             </button>
             <button
               onClick={handleViewSource}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg font-semibold transition-colors border border-slate-600"
+              className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg font-semibold transition-colors border border-slate-600"
             >
               <Github className="w-4 h-4" />
-              View Source
+              <span className="hidden sm:inline">View Source</span>
+              <span className="sm:hidden">Source</span>
             </button>
           </div>
         </div>
 
         {/* Right Panel - Info Panel */}
-        <aside className="w-96 bg-slate-800 border-l border-slate-700 overflow-y-auto shadow-lg flex flex-col">
+        <aside className="hidden lg:flex w-96 bg-slate-800 border-l border-slate-700 overflow-y-auto shadow-lg flex-col">
           {/* Tabs */}
           <div className="flex border-b border-slate-700 bg-slate-900">
             <button
